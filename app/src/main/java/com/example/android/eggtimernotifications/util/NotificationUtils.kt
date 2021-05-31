@@ -40,11 +40,22 @@ private val FLAGS = 0
 fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
     // Create the content intent for the notification, which launches
     // this activity
-    // TODO: Step 1.11 create intent
+    // TODO: Step 1.11 create intent //DONE
+    val contentIntent = Intent(applicationContext, MainActivity::class.java)
 
-    // TODO: Step 1.12 create PendingIntent
+    // TODO: Step 1.12 create PendingIntent //DONE
+    val contentPendingIntent = PendingIntent.getActivity(
+        applicationContext,
+        NOTIFICATION_ID,
+        contentIntent,
+        PendingIntent.FLAG_UPDATE_CURRENT // If the PendingIntent exists, keep it but replace its extra data
+    )
 
     // TODO: Step 2.0 add style
+    val eggImage = BitmapFactory.decodeResource(applicationContext.resources, R.drawable.cooked_egg)
+    val bigPicStyle = NotificationCompat.BigPictureStyle()
+        .bigPicture(eggImage)
+        .bigLargeIcon(null) // This way the icon goes away when expanding the notification
 
     // TODO: Step 2.2 add snooze action
 
@@ -57,17 +68,20 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     builder.setContentTitle(applicationContext.getString(R.string.notification_title))
         .setContentText(messageBody)
         .setSmallIcon(R.drawable.cooked_egg)
+    // TODO: Step 1.13 set content intent
+        .setContentIntent(contentPendingIntent)
+        .setAutoCancel(true) // When clicked, the notification is dismissed automatically
+    // TODO: Step 2.1 add style to builder
+        .setStyle(bigPicStyle)
+        .setLargeIcon(eggImage)
 
     // TODO: Step 1.4 call notify //DONE
     notify(NOTIFICATION_ID, builder.build())
 
-    // TODO: Step 1.8 use the new 'breakfast' notification channel
+    // TODO: Step 1.8 use the new 'breakfast' notification channel //DONE
 
 
 
-    // TODO: Step 1.13 set content intent
-
-        // TODO: Step 2.1 add style to builder
 
         // TODO: Step 2.3 add snooze action
 
@@ -77,4 +91,7 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
 
 }
 
-// TODO: Step 1.14 Cancel all notifications
+// TODO: Step 1.14 Cancel all notifications //DONE
+fun NotificationManager.cancelNotifications(){
+    cancelAll()
+}
