@@ -80,25 +80,19 @@ fun NotificationManager.sendNotification(messageBody: String, applicationContext
     // TODO: Step 2.1 add style to builder //DONE
         .setStyle(bigPicStyle)
         .setLargeIcon(eggImage)
-    // TODO: Step 2.3 add snooze action
+    // TODO: Step 2.3 add snooze action //DONE
         .addAction(
             R.drawable.egg_icon,
             applicationContext.getString(R.string.snooze),
             snoozePendingIntent
         )
+    // TODO: Step 2.5 set priority for devices running API 25 or lower //DONE
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
 
     // TODO: Step 1.4 call notify //DONE
     notify(NOTIFICATION_ID, builder.build())
 
     // TODO: Step 1.8 use the new 'breakfast' notification channel //DONE
-
-
-
-
-    // TODO: Step 2.5 set priority
-
-
-
 }
 
 // TODO: Step 1.14 Cancel all notifications //DONE
