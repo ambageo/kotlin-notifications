@@ -58,6 +58,11 @@ class EggTimerFragment : Fragment() {
             getString(R.string.egg_notification_channel_name)
         )
 
+        // TODO: Also create a channel for FCM so that users are able to enable/disable it //DONE
+        createChannel(getString(R.string.breakfast_notification_channel_id),
+                        getString( R.string.breakfast_notification_channel_name))
+
+
         return binding.root
     }
 
